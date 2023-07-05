@@ -6,11 +6,4 @@ package org.braulioecheverria.utils;
  */
 public class Excepciones  extends Exception {
     
-    public void validarNumero(int numero){
-        try{
-            
-        }catch(Exception e){
-            
-        }
-    }
 }

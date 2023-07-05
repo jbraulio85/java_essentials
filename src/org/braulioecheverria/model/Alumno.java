@@ -42,9 +42,9 @@ public class Alumno extends Persona implements Serializable{
 
     @Override
     public String toString() {
-        return "Los datos del alumno son {" + "\n" +
+        return "LOS DATOS DEL ALUMNO SON {" + "\n" +
                 "Código Académico=" + codigoAcademico + "\n" +
-                "Código Técnico=" + codigoTecnico + "\n" +
+                "Código Técnico=" + codigoTecnico +
                 super.toString()+
                 '}';
     }

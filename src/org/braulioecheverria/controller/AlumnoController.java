@@ -7,28 +7,29 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.braulioecheverria.model.Alumno;
+import org.braulioecheverria.utils.Excepciones;
 
 /**
  *
  * @author jbmon
  */
-public class AlumnoController{
+public class AlumnoController extends Excepciones{
     private static AlumnoController instancia;
     private ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
+    private String mensaje;
     
     private  AlumnoController (){
         
     }
-   
+    
     public static synchronized AlumnoController getInstancia(){
         if(instancia == null){
             instancia = new AlumnoController();
         }
         return instancia;
     }
+    
     public void agregarAlumno(String codigoAcademico, String codigoTecnico, String nombres, String apellidos,  
         String email, int telefono, int id){ 
         Alumno al = new Alumno(codigoAcademico,codigoTecnico,nombres,apellidos,email,telefono,id);
@@ -41,7 +42,9 @@ public class AlumnoController{
         }catch (FileNotFoundException e){
             System.out.println("Existió un erro al guardar " + e.getMessage());
         } catch (IOException ex) {
-            Logger.getLogger(AlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Existió un error al al ejecutar el método");
+        }catch(NumberFormatException e){
+            System.out.println("Ingresaste una létra en lugar de un número");
         }
     }
     
@@ -88,7 +91,7 @@ public class AlumnoController{
             }
             guardarAlumnos();
         }catch(FileNotFoundException e){
-            System.out.println("Existió un erro al recuperar la información: " + e.getMessage());
+            System.out.println("Existió un error al recuperar la información: " + e.getMessage());
         }catch (IOException ex) {
             System.out.println("Error de entrada o de salida");
         } catch (ClassNotFoundException ex) {
@@ -106,7 +109,7 @@ public class AlumnoController{
         }catch (FileNotFoundException e){
             System.out.println("Existió un erro al guardar " + e.getMessage());
         } catch (IOException ex) {
-            Logger.getLogger(AlumnoController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Existió un error de ejecución");
         }
     }
     
@@ -118,18 +121,17 @@ public class AlumnoController{
             for(Alumno alumno : alumnos){
                 if(alumno.getId() == id){
                     alumnos.remove(alumno);
-                    System.out.println("Alumno Eliminaro exitosamente");
+                    System.out.println("Alumno Eliminaron exitosamente");
                     break;
                 }
             }
             guardarAlumnos();
         }catch(FileNotFoundException e){
-            System.out.println("Existió un erro al recuperar la información: " + e.getMessage());
+            System.out.println("Existió un error al recuperar la información: " + e.getMessage());
         }catch (IOException ex) {
             System.out.println("Error de entrada o de salida");
         } catch (ClassNotFoundException ex) {
             System.out.println("Existió un error al recuperar la información, no se encuentra la clase.");
         }
-        
     }
 }
